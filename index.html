@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prueba personas</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/aplication.css">
+</head>
+
+
+<body ng-app="personaWebApp">
+    <nav class="navbar navbar-default navbar-inverse" >
+   <div class="navbar-header"> </div>
+   <ul class="nav navbar-nav">
+    <li class="active"><a  href="index.html"><span class="glyphicon glyphicon-home"></span> Inventarios</a></li>
+    <li class=""><a  href="#"><span class="glyphicon glyphicon-list-alt"></span> Reportes</a></li>
+      <li class=""><a  href="#"><span class="glyphicon glyphicon-tag"></span> Acerca De</a></li>
+         <li class=""><a  href="#"><span class="glyphicon glyphicon-user"></span> Contacto</a></li>
+
+   </ul>
+ </nav>
+
+
+
+
+
+<div ng-controller="personaController">
+
+
+<div class="container">
+<div  class="tab-pane fade in active ; table-responsive" id="Mostrar" >
+        <input ng-model="criterio" type="text"/>
+           <table class="table table-condensed" ng-init="MostrarPersonas()">
+
+        <tr>
+          <th class="col-md-2">Id Persona</th>
+          <th class="col-md-1">Apellido</th>
+          <th class="col-md-1">Nombre</th>
+          <th>Dni</th>
+          <th>Edad</th>
+          <th>Editar</th>
+           <th>Borrar</th>
+        </tr>
+
+
+
+        <tr ng-repeat="persona in personalista  | filter:dcriteria ">
+          <td class="col-md-2">{{persona._id}}</td>
+          <td class="col-md-1"> {{persona.apellido}}</td>
+           <td class="col-md-1">{{persona.nombre}}</td>
+          <td>{{persona.dni}}</td>
+          <td>{{persona.edad}}</td>
+          <td><button class="btn btn-primary " data-toggle="modal"  data-target="#myModal" >Editar</button></td>
+          <td><button class="btn btn-default"  href="#" >Borrar</button></td>
+			
+         
+
+          
+
+        </tr>
+        
+      </table>
+
+
+
+    </div>
+
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="disenio">Editar Datos de Persona</h4>
+      </div>
+      <div class="modal-body">
+        
+		<form role="form" name="cont" ng-init="step=0">
+
+				<fieldset class="form-group">
+                <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
+              </fieldset>
+
+				<fieldset class="form-group">
+                <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
+              </fieldset>
+
+				<fieldset class="form-group">
+                <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
+              </fieldset>
+
+              <fieldset class="persona-group">
+                <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
+              </fieldset>
+
+              
+	
+		</form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" ng-click="crearPersona(persona)">Guardar Cambios</button>
+
+      {{mensaje}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <div class="tab-pane fade container {{taboptions}}" style="width:40%" id="Editar">
+
+
+		<form role="form" name="cont" ng-init="step=0">
+
+				<fieldset class="form-group">
+                <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
+              </fieldset>
+
+				<fieldset class="form-group">
+                <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
+              </fieldset>
+
+				<fieldset class="form-group">
+                <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
+              </fieldset>
+
+              <fieldset class="persona-group">
+                <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
+              </fieldset>
+
+              <p></p>
+		<button  class="btn btn-default" ng-click="taboptions=''">Enviar</button>	
+		</form>
+
+		<div><h2>
+	
+		</h2></div>
+
+
+		
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+	<script src="src/lib/angular.min.js"></script>
+    <script src="src/lib/jquery.min.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/lib/bootstrap.min.js"></script>
+</body>
+</html>
