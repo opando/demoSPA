@@ -7,7 +7,8 @@ app.controller("personaController",['$scope','$http',
 
 		$http.post('/personas',persona)
 		.success(function(data, status, headers, config){
-			$scope.mensaje = data;
+			$scope.todos.push(data);
+
 		})	
 		.error(function(data,status,headers,config){
 
@@ -17,7 +18,7 @@ app.controller("personaController",['$scope','$http',
 	      console.log("headers :" + headers);
 
 		});
-
+			$scope.persona={}
 
 
 		}
@@ -41,6 +42,19 @@ app.controller("personaController",['$scope','$http',
 
 		}
 
+
+
+
+$scope.todos = [{
+        text: 'Manuel'
+    } ];
+
+   
+
+
+
+
+
 $scope.opteneropcion = function(){
 							
 								var taboptionsin="in active"
@@ -48,6 +62,8 @@ $scope.opteneropcion = function(){
 
 
 					}
+
+
 
 
 

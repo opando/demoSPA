@@ -29,7 +29,7 @@ module.exports  = function(app){
 
 		personaTemp.save(function(err,output){
 			if(!err)
-				res.send("Se ha grabado con exito");
+				res.send(output);
 			else
 				console.log("ERROR " + err);
 		});

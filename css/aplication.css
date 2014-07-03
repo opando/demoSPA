@@ -5,3 +5,5 @@
 .ng-valid.ng-dirty {
   border-color: green 
 }
+
+.ng-valid.ng-dirty {border-color: green}

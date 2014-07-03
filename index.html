@@ -9,87 +9,107 @@
 
 
 <body ng-app="personaWebApp">
-    <nav class="navbar navbar-default navbar-inverse" >
+  <nav class="navbar navbar-default navbar-inverse" >
    <div class="navbar-header"> </div>
    <ul class="nav navbar-nav">
     <li class="active"><a  href="index.html"><span class="glyphicon glyphicon-home"></span> Inventarios</a></li>
     <li class=""><a  href="#"><span class="glyphicon glyphicon-list-alt"></span> Reportes</a></li>
-      <li class=""><a  href="#"><span class="glyphicon glyphicon-tag"></span> Acerca De</a></li>
-         <li class=""><a  href="#"><span class="glyphicon glyphicon-user"></span> Contacto</a></li>
-
-   </ul>
- </nav>
-
-
-
-
+    <li class=""><a  href="#"><span class="glyphicon glyphicon-tag"></span> Acerca De</a></li>
+    <li class=""><a  href="#"><span class="glyphicon glyphicon-user"></span> Contacto</a></li>
+  </ul>
+</nav>
 
 <div ng-controller="personaController">
+  <div class="container">
+    <div  class="tab-pane fade in active ; table-responsive" id="Mostrar" >
 
-
-<div class="container">
-<div  class="tab-pane fade in active ; table-responsive" id="Mostrar" >
-        <input ng-model="criterio" type="text"/>
-           <table class="table table-condensed" ng-init="MostrarPersonas()">
+     <table class="table table-condensed" ng-init="MostrarPersonas()">
 
         <tr>
-          <th class="col-md-2">Id Persona</th>
-          <th class="col-md-1">Apellido</th>
-          <th class="col-md-1">Nombre</th>
-          <th>Dni</th>
-          <th>Edad</th>
-          <th>Editar</th>
-           <th>Borrar</th>
+            <th class="col-md-2">Id Persona</th>
+            <th class="col-md-1">Apellido</th>
+            <th class="col-md-1">Nombre</th>
+            <th>Dni</th>
+            <th>Edad</th>
+            <th>Editar</th>
+            <th>Borrar</th>
         </tr>
+        <tr ng-repeat="personashow in personalista">
+          <td class="col-md-2">{{personashow._id}}</td>
+            <td class="col-md-1"> {{personashow.apellido}}</td>
+            <td class="col-md-1">{{personashow.nombre}}</td>
+            <td>{{personashow.dni}}</td>
+            <td>{{personashow.edad}}</td>
+            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up1" >Editar</button></td>
+            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up2" >Tareas</button></td>
+            <td><button class="btn btn-default"  href="#" >Borrar</button>
+        </td>
+        <tr ng-repeat="todo in todos" ng-if="!$first">
+            <td class="col-md-2">{{todo._id}}</td>
+            <td class="col-md-1"> {{todo.apellido}}</td>
+            <td class="col-md-1">{{todo.nombre}}</td>
+            <td>{{todo.dni}}</td>
+            <td>{{todo.edad}}</td>
+            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up1" >Editar</button></td>
+            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up2" >Tareas</button></td>
+            <td><button class="btn btn-default"  href="#" >Borrar</button></td>
 
+          <tr>
 
+          </tr>
 
-        <tr ng-repeat="persona in personalista  | filter:dcriteria ">
-          <td class="col-md-2">{{persona._id}}</td>
-          <td class="col-md-1"> {{persona.apellido}}</td>
-           <td class="col-md-1">{{persona.nombre}}</td>
-          <td>{{persona.dni}}</td>
-          <td>{{persona.edad}}</td>
-          <td><button class="btn btn-primary " data-toggle="modal"  data-target="#myModal" >Editar</button></td>
-          <td><button class="btn btn-default"  href="#" >Borrar</button></td>
-			
-         
-
-          
-
-        </tr>
-        
       </table>
-
-
-
     </div>
+    
+        <input  class="btn btn-primary" type="submit" value="Agregar Nuevo Registro"  ng-click="step=1">  
 
+      <div  ng-show="step===1" >
+        <h5 class="modal-title" id="disenio" style="margin-top:1cm;" >Agregar Datos de Persona</h5>
+        <form role="form" name="cont" ng-init="step=0" ng-submit = "crearPersona(persona)">
+            <fieldset class="form-group">
+              <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form">
+            </fieldset>
+            <fieldset class="form-group">
+              <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido" ng-form="step2form">
+            </fieldset>
+            <fieldset class="form-group">
+              <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad" ng-form="step3form" >
+            </fieldset>
+            <fieldset class="persona-group">
+              <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
+            </fieldset>
+            <button type="button" class="btn btn-default" style="margin-top:0.5cm;" data-dismiss="modal" ng-click="step=2" >Cerrar</button>
+            <input  class="btn btn-primary" type="submit" style="margin-top:0.5cm;" value="Guardar Cambios" ng-click="step=2">
 
+        </form>
+      </div>
+        
 
+ <!--ng-submit = "crearPersona(persona)"-->
 
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
+<div class="modal fade" id="Pop-up1" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
         <h4 class="modal-title" id="disenio">Editar Datos de Persona</h4>
-      </div>
-      <div class="modal-body">
-        
-		<form role="form" name="cont" ng-init="step=0">
+          </div>
 
-				<fieldset class="form-group">
+
+          <div class="modal-body">
+        
+           <form role="form" name="cont" ng-init="step=0">   
+
+        <fieldset class="form-group">
                 <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
               </fieldset>
 
-				<fieldset class="form-group">
+        <fieldset class="form-group">
                 <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
               </fieldset>
 
-				<fieldset class="form-group">
+        <fieldset class="form-group">
                 <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
               </fieldset>
 
@@ -97,17 +117,46 @@
                 <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
               </fieldset>
 
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <input  class="btn btn-primary" type="submit" value="Guardar Cambios" >
+              {{mensaje}}
               
-	
-		</form>
+  
+    </form>
 
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" ng-click="crearPersona(persona)">Guardar Cambios</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-      {{mensaje}}
+
+<!--Tareas-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="disenio">Editar Datos de Persona</h4>
+          </div>
+
+
+          <div class="modal-body">
+        
+          
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        
       </div>
     </div>
   </div>
@@ -118,42 +167,16 @@
 
 
 
-    <div class="tab-pane fade container {{taboptions}}" style="width:40%" id="Editar">
 
 
-		<form role="form" name="cont" ng-init="step=0">
 
-				<fieldset class="form-group">
-                <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
-              </fieldset>
-
-				<fieldset class="form-group">
-                <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
-              </fieldset>
-
-				<fieldset class="form-group">
-                <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
-              </fieldset>
-
-              <fieldset class="persona-group">
-                <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
-              </fieldset>
-
-              <p></p>
-		<button  class="btn btn-default" ng-click="taboptions=''">Enviar</button>	
-		</form>
-
-		<div><h2>
-	
-		</h2></div>
+<!--end -->
 
 
-		
-</div>
 
-</div>
+      </div>
 
-</div>
+    </div>
 
 
 
@@ -162,9 +185,9 @@
 
 
 
-	<script src="src/lib/angular.min.js"></script>
+    <script src="src/lib/angular.min.js"></script>
     <script src="src/lib/jquery.min.js"></script>
     <script src="src/app.js"></script>
     <script src="src/lib/bootstrap.min.js"></script>
-</body>
-</html>
+  </body>
+  </html>
