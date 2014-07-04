@@ -44,6 +44,49 @@ app.controller("personaController",['$scope','$http',
 
 
 
+		$scope.MostrarPersonasbyID = function(id){
+
+		$http.get('/persona/'+id)
+		.success(function(data, status, headers, config){
+			console.log(data)
+			$scope.editarlista = data;
+		})	
+		.error(function(data,status,headers,config){
+
+			   console.log("ERROR!!");
+	      console.log("data : " +data);
+	      console.log("status :" + status);
+	      console.log("headers :" + headers);
+
+		});
+
+
+
+		}
+
+
+		$scope.ActualizarPersona = function(persona){
+
+		$http.put('/personas/'+persona._id,persona)
+		.success(function(data, status, headers, config){
+			console.log(data)
+			$scope.mensajeact = data;
+		})	
+		.error(function(data,status,headers,config){
+
+			   console.log("ERROR!!");
+	      console.log("data : " +data);
+	      console.log("status :" + status);
+	      console.log("headers :" + headers);
+
+		});
+
+
+
+		}
+
+
+
 
 $scope.todos = [{
         text: 'Manuel'
@@ -51,7 +94,19 @@ $scope.todos = [{
 
    
 
+$scope.obtener = function (valor) {
+	
 
+
+	if (valor===1) {
+		console.log(valor)
+		$scope.resultado =100;
+	}
+	else {
+$scope.resultado =0;
+	};
+	// body...
+}
 
 
 

@@ -37,6 +37,7 @@
      <label> 
       Buscar <input type="text" ng-model="criteria">
       </label>
+
      <table class="table table-condensed" ng-init="MostrarPersonas()">
 
         <tr>
@@ -46,6 +47,7 @@
             <th>Dni</th>
             <th>Edad</th>
             <th>Editar</th>
+            <th>Tareas</th>
             <th>Borrar</th>
         </tr>
         <tr ng-repeat="personashow in personalista | filter:criteria">
@@ -54,10 +56,10 @@
             <td class="col-md-1">{{personashow.nombre}}</td>
             <td>{{personashow.dni}}</td>
             <td>{{personashow.edad}}</td>
-            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up1" >Editar</button></td>
+            <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up1" ng-click="MostrarPersonasbyID(personashow._id)" >Editar</button></td>
             <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up2" >Tareas</button></td>
             <td><button class="btn btn-default"  href="#" >Borrar</button>
-        </td>
+        </td>Tareas
         <tr ng-repeat="todo in todos | filter:criteria" ng-if="!$first" >
             <td class="col-md-2">{{todo._id}}</td>
             <td class="col-md-1"> {{todo.apellido}}</td>
@@ -116,24 +118,24 @@
            <form role="form" name="cont" ng-init="step=0">   
 
         <fieldset class="form-group">
-                <input ng-model="persona.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
+                <input ng-model="editarlista.nombre" class="form-control" placeholder="Escribir tu nombre completo" title="Nombre" ng-form="step1form"  >
               </fieldset>
 
         <fieldset class="form-group">
-                <input ng-model="persona.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
+                <input ng-model="editarlista.apellido" class="form-control" placeholder="Escribe tus Apellidos" title="Apellido"  ng-form="step2form" >
               </fieldset>
 
         <fieldset class="form-group">
-                <input ng-model="persona.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
+                <input ng-model="editarlista.edad" type="number" class="form-control" placeholder="Escribe tu edad" title="edad"  ng-form="step3form" >
               </fieldset>
 
               <fieldset class="persona-group">
-                <input ng-model="persona.dni"  type="number" class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
+                <input ng-model="editarlista.dni"   class="form-control" placeholder="Escribe tu DNI" title="dni"  ng-form="step4form" >
               </fieldset>
 
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <input  class="btn btn-primary" type="submit" value="Guardar Cambios" >
-              {{mensaje}}
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="MostrarPersonas();mensajeact.msj=''">Cerrar</button>
+              <input  class="btn btn-primary" type="submit" value="Guardar Cambios" ng-click="ActualizarPersona(editarlista)" >
+              {{mensajeact.msj}}
               
   
     </form>
@@ -149,7 +151,7 @@
 
 
 <!--Tareas-->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
+<div class="modal fade" id="Pop-up2" tabindex="-1" role="dialog" aria-labelledby="disenio" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       
@@ -163,7 +165,22 @@
 
           <div class="modal-body">
         
-          
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{opc1+opc2+opc3+opc4}}%;">
+              </div>
+            </div>
+
+            <textarea>
+              
+
+            </textarea>
+            <form>
+            Tarea 1   <input ng-click= "opc1=25" type="checkbox"></input> 
+            Tarea 2   <input ng-click= "opc2=25" type="checkbox"></input> 
+            Tarea 3   <input ng-click= "opc3=25" type="checkbox"></input> 
+            Tarea 4   <input ng-click= "opc4=25" type="checkbox"></input> 
+            </form>
+            
 
 
 

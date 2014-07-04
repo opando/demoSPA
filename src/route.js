@@ -36,6 +36,20 @@ module.exports  = function(app){
 
 	}
 //UPDATE
+
+findPersonasbyid = function(req,res) {
+
+		Persona.findById (req.params.id, function(err,personabyid){
+			if(!err)
+				res.send(personabyid);
+							else
+				console.log("ERROR " + err);
+		});
+
+	}
+
+
+
 	updatePersona = function(req,res) {
 
 		Persona.findById (req.params.id, function(err, encontrado){
@@ -61,7 +75,7 @@ module.exports  = function(app){
 
 	}
 
-
+app.get('/persona/:id',findPersonasbyid);
 app.put('/personas/:id',updatePersona);
 app.get('/personas',findPersonas);
 app.post('/personas',savePersona);
