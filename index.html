@@ -34,7 +34,9 @@
 <div ng-controller="personaController">
   <div class="container">
     <div  class="tab-pane fade in active ; table-responsive" id="Mostrar" >
-
+     <label> 
+      Buscar <input type="text" ng-model="criteria">
+      </label>
      <table class="table table-condensed" ng-init="MostrarPersonas()">
 
         <tr>
@@ -46,7 +48,7 @@
             <th>Editar</th>
             <th>Borrar</th>
         </tr>
-        <tr ng-repeat="personashow in personalista">
+        <tr ng-repeat="personashow in personalista | filter:criteria">
           <td class="col-md-2">{{personashow._id}}</td>
             <td class="col-md-1"> {{personashow.apellido}}</td>
             <td class="col-md-1">{{personashow.nombre}}</td>
