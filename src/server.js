@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 //coneccion MongoDB
-mongoose.connect('mongodb://localhost/persona', function(err, res){
+mongoose.connect('mongodb://localhost/personaDB', function(err, res){
 		if(err) 
 			console.log('ERROR: Conectando a DB' + err);
 		else 
