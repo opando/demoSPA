@@ -9,14 +9,26 @@
 
 
 <body ng-app="personaWebApp">
-  <nav class="navbar navbar-default navbar-inverse" >
-   <div class="navbar-header"> </div>
-   <ul class="nav navbar-nav">
-    <li class="active"><a  href="index.html"><span class="glyphicon glyphicon-home"></span> Inventarios</a></li>
-    <li class=""><a  href="#"><span class="glyphicon glyphicon-list-alt"></span> Reportes</a></li>
-    <li class=""><a  href="#"><span class="glyphicon glyphicon-tag"></span> Acerca De</a></li>
-    <li class=""><a  href="#"><span class="glyphicon glyphicon-user"></span> Contacto</a></li>
-  </ul>
+  <nav class="navbar navbar-default navbar-inverse" role="navigation">
+   <div class="container-fluid">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-demo">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>     
+   </div>
+
+   <div class="collapse navbar-collapse" id="menu-demo">
+     <ul class="nav navbar-nav">
+        <li class="active"><a  href="index.html"><span class="glyphicon glyphicon-home"></span> Inventarios</a></li>
+        <li class=""><a  href="#"><span class="glyphicon glyphicon-list-alt"></span> Reportes</a></li>
+        <li class=""><a  href="#"><span class="glyphicon glyphicon-tag"></span> Acerca De</a></li>
+        <li class=""><a  href="#"><span class="glyphicon glyphicon-user"></span> Contacto</a></li>
+      </ul>
+   </div>
+  </div>
 </nav>
 
 <div ng-controller="personaController">
