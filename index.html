@@ -58,7 +58,7 @@
             <td><button class="btn btn-primary " data-toggle="modal"  data-target="#Pop-up2" >Tareas</button></td>
             <td><button class="btn btn-default"  href="#" >Borrar</button>
         </td>
-        <tr ng-repeat="todo in todos" ng-if="!$first">
+        <tr ng-repeat="todo in todos | filter:criteria" ng-if="!$first" >
             <td class="col-md-2">{{todo._id}}</td>
             <td class="col-md-1"> {{todo.apellido}}</td>
             <td class="col-md-1">{{todo.nombre}}</td>
